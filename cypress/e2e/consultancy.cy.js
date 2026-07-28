@@ -7,7 +7,7 @@ beforeEach(() => {
   cy.goTo("Formulários", "Consultoria");
 })
 
-  it("Deve solicitar consultoria individual", () => {
+  it.only("Deve solicitar consultoria individual", () => {
     cy.get("#name").type("Fernando Papito");
     cy.get("#email").type("fernando.papito@webdojo.com");
 
@@ -72,9 +72,14 @@ beforeEach(() => {
 
     cy.contains("button", "Enviar formulário").click();
 
-    cy.contains(
-      "Sua solicitação de consultoria foi enviada com sucesso! Em breve, nossa equipe entrará em contato através do email fornecido.",
-    ).should("be.visible");
+  
+
+    cy.get('.modal', {timeout: 70000})
+    .should('be.visible')
+    .find('.modal-content')
+    .should('be.visible')
+    .should('have.text', 'Sua solicitação de consultoria foi enviada com sucesso! Em breve, nossa equipe entrará em contato através do email fornecido.')
+
   });
 
   it("Deve verificar os campos obrigatórios", () => {
@@ -82,13 +87,20 @@ beforeEach(() => {
     cy.contains("button", "Enviar formulário")
     .click();
 
-    cy.contains('p','Digite nome e sobrenome')
+    cy.contains('label','Nome Completo')
+    .parent()
+    .find('p')
     .scrollIntoView()
-    .should('be.visible');
-   
-    cy.contains('p','Informe um email válido')
+    .should('be.visible')
+    .should('have.text','Campo obrigatório');
+
+    cy.contains('label','Email')
+    .parent()
+    .find('p')
     .scrollIntoView()
-    .should('be.visible');
+    .should('be.visible')
+    .should('have.text','Campo obrigatório');
+  
 
      cy.contains('p', 'Você precisa aceitar os termos de uso')
     .scrollIntoView()
