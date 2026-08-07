@@ -9,6 +9,7 @@ module.exports = defineConfig({
     },
     experimentalStudio: true,
     experimentalFastVisibility: true,
+    video:true,
 
 
   },

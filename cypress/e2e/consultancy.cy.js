@@ -7,7 +7,8 @@ beforeEach(() => {
   cy.goTo("Formulários", "Consultoria");
 })
 
-  it.only("Deve solicitar consultoria individual", () => {
+  it("Deve solicitar consultoria individual", () => {
+    
     cy.get("#name").type("Fernando Papito");
     cy.get("#email").type("fernando.papito@webdojo.com");
 
