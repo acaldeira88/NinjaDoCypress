@@ -25,10 +25,12 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import 'cypress-real-events'
+import './actions/consultancy.actions'
+
+import { dataDeHoje } from './utils'
 
 Cypress.Commands.add("start", (url) => {
-  cy.viewport(1920, 1080);
-  cy.visit("http://localhost:3000");
+  cy.visit('/');
 });
 
 
@@ -47,8 +49,25 @@ Cypress.Commands.add("goTo", (buttonName, pageTitle) => {
 });
 
 // helper login command
-Cypress.Commands.add('login', () => {
+Cypress.Commands.add('login', (ui = false) => {
+
+  if (ui === true) {
   cy.start();
   cy.submitLoginForm("papito@webdojo.com", "katana123");
-  
+
+  } else { 
+
+      const token = 'e1033d63a53fe66c0fd3451c7fd8f617'
+  const loginDate = dataDeHoje()
+
+  cy.setCookie('login_date', loginDate)
+
+  cy.visit('/dashboard', {
+    onBeforeLoad: (win) => {
+      win.localStorage.setItem('token', token)
+    }
+  })
+  }
+
+
 })

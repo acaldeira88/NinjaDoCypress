@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "cypress": "^15.20.1"
+    "cypress": "^15.21.1"
   },
   "name": "ninjadocypress",
   "version": "1.0.0",
@@ -158,7 +158,9 @@
     "yauzl": "^3.4.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx cypress run",
+    "test:ui": "npx cypress open",
+    "test:login": "npx cypress run --spec cypress/e2e/login.cy.js"
   },
   "author": "",
   "license": "ISC",
