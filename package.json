@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "cypress": "^15.21.1"
+    "cypress": "^16.0.0"
   },
   "name": "ninjadocypress",
   "version": "1.0.0",
